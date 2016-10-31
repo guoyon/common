@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 
 /**
  * 简单的Https请求工具
@@ -200,7 +201,17 @@ public final class Https {
     private String doRequest() {
         if (!Strings.isNullOrEmpty(body)){
             try (OutputStream out = connection.getOutputStream()){
-                out.write(body.getBytes());
+            	
+     
+            	log.info("汉字："+body+"编码形式："+Arrays.toString(body.getBytes()));  
+            	log.info(body.getBytes().toString());
+  
+                byte[] b = body.getBytes("utf-8");  
+                log.info("汉字："+body+"utf-8编码形式："+Arrays.toString(b));  
+                String s = new String(b,"gbk");  
+                log.info("与之对应的gbk解码形式："+s);  
+            	
+                out.write(body.getBytes("utf-8"));
             } catch (IOException e) {
                 throw new HttpsException(e);
             }
