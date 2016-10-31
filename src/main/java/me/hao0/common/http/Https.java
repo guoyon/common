@@ -1,10 +1,14 @@
 package me.hao0.common.http;
 
 import com.github.kevinsawicki.http.HttpRequest;
+
 import me.hao0.common.exception.HttpsException;
 import me.hao0.common.util.Strings;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
+
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,8 +25,10 @@ import java.net.URL;
  * @since 1.1.0
  */
 public final class Https {
+	
+	private static final Logger log = Logger.getLogger(Https.class);
 
-    private HttpsURLConnection connection;
+    public HttpsURLConnection connection;
 
     private int connectTimeout = 1000 * 5;
 
